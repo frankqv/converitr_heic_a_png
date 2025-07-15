@@ -92,7 +92,7 @@ def obtener_ruta_base():
 def obtener_factor_escala():
     """Permite al usuario elegir el factor de escala"""
     print("\n📏 Opciones de redimensionamiento:")
-    print("1. 25% del tamaño original (recomendado) ")
+    print("1. 30% del tamaño original (recomendado) ")
     print("2. 50% del tamaño original")
     print("3. 75% del tamaño original")
     print("4. Personalizado")
@@ -102,7 +102,7 @@ def obtener_factor_escala():
         opcion = input("\nElige una opción (1-4): ").strip()
         
         if opcion == "1":
-            return 0.25
+            return 0.3
         elif opcion == "2":
             return 0.50
         elif opcion == "3":
@@ -152,11 +152,11 @@ def redimensionar_imagenes(ruta_base, factor_escala=0.25):
         for archivo in archivos_imagen:
             ruta_completa = os.path.join(carpeta_actual, archivo)
             nombre_base, extension = os.path.splitext(archivo)
-            salida_redimensionada = os.path.join(carpeta_actual, f"{nombre_base}_{porcentaje}percent{extension}")
+            salida_redimensionada = os.path.join(carpeta_actual, f"{nombre_base}_{porcentaje}pcmarkett{extension}")
             
             # Verificar si ya existe el archivo redimensionado
             if os.path.exists(salida_redimensionada):
-                print(f"⚠️  Ya existe: {nombre_base}_{porcentaje}percent{extension} (omitiendo)")
+                print(f"⚠️  Ya existe: {nombre_base}_{porcentaje}pcmarkett{extension} (omitiendo)")
                 contador_omitidas += 1
                 continue
             
@@ -177,7 +177,7 @@ def redimensionar_imagenes(ruta_base, factor_escala=0.25):
                     img_redimensionada.save(salida_redimensionada, optimize=True, quality=95)
                     
                     contador_procesadas += 1
-                    print(f"✅ {archivo} → {nombre_base}_{porcentaje}percent{extension}")
+                    print(f"✅ {archivo} → {nombre_base}_{porcentaje}pcmarkett{extension}")
                     print(f"   Tamaño: {ancho_original}x{alto_original} → {nuevo_ancho}x{nuevo_alto}")
                     
             except Exception as e:
@@ -223,7 +223,7 @@ def eliminar_imagenes_originales(ruta_base, factor_escala):
         for archivo in archivos:
             if os.path.splitext(archivo.lower())[1] in extensiones_validas:
                 # Verificar que NO sea una imagen ya redimensionada
-                if f"_{porcentaje}percent" not in archivo:
+                if f"_{porcentaje}pcmarkett" not in archivo:
                     ruta_completa = os.path.join(carpeta_actual, archivo)
                     try:
                         os.remove(ruta_completa)
